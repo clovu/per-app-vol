@@ -1,0 +1,89 @@
+{
+  "name": "rust-tauri-nextjs-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "Tauri",
+    "Template",
+    "Rust",
+    "React",
+    "NextJS",
+    "Typescript"
+  ],
+  "description": "Tauri with NextJS preset template",
+  "author": "Clover You <hi@clovu.me>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clovu/rust-tauri-nextjs-template.git"
+  },
+  "homepage": "https://github.com/clovu/rust-tauri-nextjs-template#readme",
+  "bugs": {
+    "url": "https://github.com/clovu/rust-tauri-nextjs-template/issues"
+  },
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint:spell": "cspell lint *",
+    "lint": "eslint",
+    "fix": "eslint --fix",
+    "tauri": "tauri",
+    "preinstall": "npx only-allow pnpm",
+    "test": "vitest",
+    "prepare": "husky"
+  },
+  "engines": {
+    "node": ">=23"
+  },
+  "dependencies": {
+    "@iconify-json/carbon": "^1.2.23",
+    "@iconify-json/f7": "^1.2.2",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-popover": "^1.1.17",
+    "@radix-ui/react-scroll-area": "^1.2.12",
+    "@radix-ui/react-slot": "^1.2.5",
+    "@tauri-apps/api": "2",
+    "@tauri-apps/plugin-shell": "2.3.5",
+    "allotment": "^1.20.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "husky": "^9.1.7",
+    "jotai": "^2.20.1",
+    "lucide-react": "^1.18.0",
+    "next": "16.2.9",
+    "next-themes": "^0.4.6",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-resizable-panels": "4.11.2",
+    "react-split-pane": "^3.2.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@cspell/dict-lorem-ipsum": "^4.0.5",
+    "@cspell/eslint-plugin": "^10.0.1",
+    "@eslint/js": "^10.0.1",
+    "@iconify/tailwind4": "^1.2.3",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@tauri-apps/cli": "2.11.2",
+    "@types/node": "^26.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "babel-plugin-react-compiler": "1.0.0",
+    "cspell": "^10.0.1",
+    "eslint": "^10.5.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "globals": "^17.7.0",
+    "lint-staged": "^17.0.8",
+    "postcss": "^8.5.16",
+    "postcss-load-config": "^6.0.1",
+    "react-compiler-healthcheck": "1.0.0",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0",
+    "vitest": "^4.1.9"
+  }
+}

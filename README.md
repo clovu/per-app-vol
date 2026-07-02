@@ -1,7 +1,3 @@
-# Tauri + React + Typescript
+# Per-App Volume
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+A per-app volume mixer for macOS that allows you to control the volume level of individual applications.

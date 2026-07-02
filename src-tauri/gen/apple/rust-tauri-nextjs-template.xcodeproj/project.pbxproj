@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02BE117C10522A76DF029640 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251100C368FF1345407C228B /* MetalKit.framework */; };
-		083025018E4BBDEC098298C2 /* librust_tauri_nextjs_template_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0072B24F0FA1D0D3A8D92A8 /* librust_tauri_nextjs_template_lib.a */; };
+		083025018E4BBDEC098298C2 /* libper_app_vole_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0072B24F0FA1D0D3A8D92A8 /* libper_app_vole_lib.a */; };
 		6E23384ADA2A29A84289147C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B2FFF06BC8505F2E592398C /* QuartzCore.framework */; };
 		6F3EC515FA23EFC80A46C4A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182F5B612618B0780DE33202 /* UIKit.framework */; };
 		80BC1172807E90FD0A1F46E0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FE448B4CCBE92E3FF956C7 /* WebKit.framework */; };
@@ -23,18 +23,18 @@
 /* Begin PBXFileReference section */
 		0ABD2607E29F0D99B3936B4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		182F5B612618B0780DE33202 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		22859F357DCB37D2A04AD6F6 /* rust-tauri-nextjs-template_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "rust-tauri-nextjs-template_iOS.entitlements"; sourceTree = "<group>"; };
+		22859F357DCB37D2A04AD6F6 /* per-app-vole_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "per-app-vole_iOS.entitlements"; sourceTree = "<group>"; };
 		251100C368FF1345407C228B /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		28FE448B4CCBE92E3FF956C7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2B2FFF06BC8505F2E592398C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32990CF2414C34B8CC24BBEE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32B61A0AE700C7591D28F815 /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
-		34C5CA8BB1476BDFF5D7CF82 /* rust-tauri-nextjs-template_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "rust-tauri-nextjs-template_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34C5CA8BB1476BDFF5D7CF82 /* per-app-vole_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "per-app-vole_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		507149B83302F2A80228C17D /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		553244AE3B2EB2ADE32CBC8E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8754D02EACC3EFF4B6D81459 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		9E75393A5DDD0C1297B6D4FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		B0072B24F0FA1D0D3A8D92A8 /* librust_tauri_nextjs_template_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librust_tauri_nextjs_template_lib.a; sourceTree = "<group>"; };
+		B0072B24F0FA1D0D3A8D92A8 /* libper_app_vole_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libper_app_vole_lib.a; sourceTree = "<group>"; };
 		D4550B7087CD2413CB86A964 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
 		D6B2E3EF21D52A988B876435 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
 		E911180AE21D3D3BA847B646 /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				083025018E4BBDEC098298C2 /* librust_tauri_nextjs_template_lib.a in Frameworks */,
+				083025018E4BBDEC098298C2 /* libper_app_vole_lib.a in Frameworks */,
 				9993DE83D40FFB9919252DE2 /* CoreGraphics.framework in Frameworks */,
 				AC0BFAA961417EBB50E9C5E6 /* Metal.framework in Frameworks */,
 				02BE117C10522A76DF029640 /* MetalKit.framework in Frameworks */,
@@ -62,7 +62,7 @@
 		17E37291502F0E692FC175C4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E49925791927D6A75FF6CB1B /* rust-tauri-nextjs-template */,
+				E49925791927D6A75FF6CB1B /* per-app-vole */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 				D4550B7087CD2413CB86A964 /* assets */,
 				0ABD2607E29F0D99B3936B4B /* Assets.xcassets */,
 				46D8316543264DC329DADACA /* Externals */,
-				9E3BF82B4A9B9DCD84AA23A1 /* rust-tauri-nextjs-template_iOS */,
+				9E3BF82B4A9B9DCD84AA23A1 /* per-app-vole_iOS */,
 				17E37291502F0E692FC175C4 /* Sources */,
 				C76834922C72B001BBD985D4 /* src */,
 				F6D84EE0CB72A0E9652A0EA2 /* Frameworks */,
@@ -99,18 +99,18 @@
 		9978D51F7710308613973B83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				34C5CA8BB1476BDFF5D7CF82 /* rust-tauri-nextjs-template_iOS.app */,
+				34C5CA8BB1476BDFF5D7CF82 /* per-app-vole_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9E3BF82B4A9B9DCD84AA23A1 /* rust-tauri-nextjs-template_iOS */ = {
+		9E3BF82B4A9B9DCD84AA23A1 /* per-app-vole_iOS */ = {
 			isa = PBXGroup;
 			children = (
 				9E75393A5DDD0C1297B6D4FA /* Info.plist */,
-				22859F357DCB37D2A04AD6F6 /* rust-tauri-nextjs-template_iOS.entitlements */,
+				22859F357DCB37D2A04AD6F6 /* per-app-vole_iOS.entitlements */,
 			);
-			path = "rust-tauri-nextjs-template_iOS";
+			path = "per-app-vole_iOS";
 			sourceTree = "<group>";
 		};
 		C76834922C72B001BBD985D4 /* src */ = {
@@ -123,20 +123,20 @@
 			path = ../../src;
 			sourceTree = "<group>";
 		};
-		E49925791927D6A75FF6CB1B /* rust-tauri-nextjs-template */ = {
+		E49925791927D6A75FF6CB1B /* per-app-vole */ = {
 			isa = PBXGroup;
 			children = (
 				507149B83302F2A80228C17D /* main.mm */,
 				46563BBBCB640C344CFB846F /* bindings */,
 			);
-			path = "rust-tauri-nextjs-template";
+			path = "per-app-vole";
 			sourceTree = "<group>";
 		};
 		F6D84EE0CB72A0E9652A0EA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				32990CF2414C34B8CC24BBEE /* CoreGraphics.framework */,
-				B0072B24F0FA1D0D3A8D92A8 /* librust_tauri_nextjs_template_lib.a */,
+				B0072B24F0FA1D0D3A8D92A8 /* libper_app_vole_lib.a */,
 				8754D02EACC3EFF4B6D81459 /* Metal.framework */,
 				251100C368FF1345407C228B /* MetalKit.framework */,
 				2B2FFF06BC8505F2E592398C /* QuartzCore.framework */,
@@ -150,9 +150,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		848706BC1C29F956A6DA1BA7 /* rust-tauri-nextjs-template_iOS */ = {
+		848706BC1C29F956A6DA1BA7 /* per-app-vole_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA8832636C17227942A4B0F8 /* Build configuration list for PBXNativeTarget "rust-tauri-nextjs-template_iOS" */;
+			buildConfigurationList = CA8832636C17227942A4B0F8 /* Build configuration list for PBXNativeTarget "per-app-vole_iOS" */;
 			buildPhases = (
 				A83EE23B390BF10A7DA4381C /* Build Rust Code */,
 				96FF61909B6B3CF340F0F589 /* Sources */,
@@ -163,9 +163,9 @@
 			);
 			dependencies = (
 			);
-			name = "rust-tauri-nextjs-template_iOS";
-			productName = "rust-tauri-nextjs-template_iOS";
-			productReference = 34C5CA8BB1476BDFF5D7CF82 /* rust-tauri-nextjs-template_iOS.app */;
+			name = "per-app-vole_iOS";
+			productName = "per-app-vole_iOS";
+			productReference = 34C5CA8BB1476BDFF5D7CF82 /* per-app-vole_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +179,7 @@
 				TargetAttributes = {
 				};
 			};
-			buildConfigurationList = 5D86843A35E6F2281339795B /* Build configuration list for PBXProject "rust-tauri-nextjs-template" */;
+			buildConfigurationList = 5D86843A35E6F2281339795B /* Build configuration list for PBXProject "per-app-vole" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				848706BC1C29F956A6DA1BA7 /* rust-tauri-nextjs-template_iOS */,
+				848706BC1C29F956A6DA1BA7 /* per-app-vole_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -223,8 +223,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/target/aarch64-apple-ios/${CONFIGURATION}/deps/librust_tauri_nextjs_template_lib.a",
-				"$(SRCROOT)/target/x86_64-apple-ios/${CONFIGURATION}/deps/librust_tauri_nextjs_template_lib.a",
+				"$(SRCROOT)/target/aarch64-apple-ios/${CONFIGURATION}/deps/libper_app_vole_lib.a",
+				"$(SRCROOT)/target/x86_64-apple-ios/${CONFIGURATION}/deps/libper_app_vole_lib.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -316,7 +316,7 @@
 					x86_64,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "rust-tauri-nextjs-template_iOS/rust-tauri-nextjs-template_iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "per-app-vole_iOS/per-app-vole_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = "arm64-sim x86_64";
@@ -325,7 +325,7 @@
 					"$(inherited)",
 					"\".\"",
 				);
-				INFOPLIST_FILE = "rust-tauri-nextjs-template_iOS/Info.plist";
+				INFOPLIST_FILE = "per-app-vole_iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,8 +333,8 @@
 				"LIBRARY_SEARCH_PATHS[arch=arm64-sim]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64-sim/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tauri.rust-tauri-nextjs-template";
-				PRODUCT_NAME = "rust-tauri-nextjs-template";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tauri.per-app-vole";
+				PRODUCT_NAME = "per-app-vole";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64  x86_64";
@@ -406,7 +406,7 @@
 					x86_64,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "rust-tauri-nextjs-template_iOS/rust-tauri-nextjs-template_iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "per-app-vole_iOS/per-app-vole_iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphoneos*]" = "arm64-sim x86_64";
@@ -415,7 +415,7 @@
 					"$(inherited)",
 					"\".\"",
 				);
-				INFOPLIST_FILE = "rust-tauri-nextjs-template_iOS/Info.plist";
+				INFOPLIST_FILE = "per-app-vole_iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -423,8 +423,8 @@
 				"LIBRARY_SEARCH_PATHS[arch=arm64-sim]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64-sim/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
 				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME) $(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tauri.rust-tauri-nextjs-template";
-				PRODUCT_NAME = "rust-tauri-nextjs-template";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tauri.per-app-vole";
+				PRODUCT_NAME = "per-app-vole";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64  x86_64";
@@ -434,7 +434,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5D86843A35E6F2281339795B /* Build configuration list for PBXProject "rust-tauri-nextjs-template" */ = {
+		5D86843A35E6F2281339795B /* Build configuration list for PBXProject "per-app-vole" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CD82063C1293DC3091F7E32 /* debug */,
@@ -443,7 +443,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = debug;
 		};
-		CA8832636C17227942A4B0F8 /* Build configuration list for PBXNativeTarget "rust-tauri-nextjs-template_iOS" */ = {
+		CA8832636C17227942A4B0F8 /* Build configuration list for PBXNativeTarget "per-app-vole_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA00974D312D1AA2D3F103F5 /* debug */,

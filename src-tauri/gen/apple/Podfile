@@ -1,13 +1,13 @@
 # Uncomment the next line to define a global platform for your project
 
-target 'rust-tauri-nextjs-template_iOS' do
+target 'per-app-vole_iOS' do
 platform :ios, '13.0'
-  # Pods for rust-tauri-nextjs-template_iOS
+  # Pods for per-app-vole_iOS
 end
 
-target 'rust-tauri-nextjs-template_macOS' do
+target 'per-app-vole_macOS' do
 platform :osx, '11.0'
-  # Pods for rust-tauri-nextjs-template_macOS
+  # Pods for per-app-vole_macOS
 end
 
 # Delete the deployment target for iOS and macOS, causing it to be inherited from the Podfile

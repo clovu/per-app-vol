@@ -1,11 +1,11 @@
 [package]
 authors = ["Clover You <hi@clovu.me>"]
-description = "A Tauri App template with NextJS"
+description = "Volume mixer for macOS. Adjust volume levels for individual apps independently"
 edition = "2024"
 license-file = "../LICENSE"
-name = "rust-tauri-nextjs-template"
+name = "per-app-vole"
 readme = "../README.md"
-repository = "https://github.com/clovu/tauri-nextjs-starter"
+repository = "https://github.com/clovu/per-app-vole"
 version = "0.1.0"
 
 [profile.release]
@@ -18,15 +18,15 @@ opt-level = 3
 
 [lib]
 crate-type = ["staticlib", "cdylib", "rlib"]
-name = "rust_tauri_nextjs_template_lib"
+name = "per_app_vole_lib"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-anyhow = "1.0.102"
+anyhow = "1.0.103"
 serde = { version = "1.0.228", features = ["derive"] }
-serde_json = "1.0.149"
+serde_json = "1.0.150"
 sqlx = { version = "0.9.0", features = [
   "runtime-tokio",
   "tls-native-tls",
@@ -34,8 +34,8 @@ sqlx = { version = "0.9.0", features = [
 ] }
 tauri = { version = "2", features = [] }
 tauri-plugin-shell = "2.3.5"
-tauri-utils = "2.8.3"
-tokio = { version = "1.52.0", features = ["tokio-macros", "macros"] }
+tauri-utils = "2.9.3"
+tokio = { version = "1.52.3", features = ["tokio-macros", "macros"] }
 
 [target."cfg(target_os = \"macos\")".dependencies]
 objc2 = "0.6.4"

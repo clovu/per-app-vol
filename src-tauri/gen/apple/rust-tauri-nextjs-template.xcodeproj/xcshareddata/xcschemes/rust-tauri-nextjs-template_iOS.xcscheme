@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "848706BC1C29F956A6DA1BA7"
-               BuildableName = "rust-tauri-nextjs-template_iOS.app"
-               BlueprintName = "rust-tauri-nextjs-template_iOS"
-               ReferencedContainer = "container:rust-tauri-nextjs-template.xcodeproj">
+               BuildableName = "per-app-vole_iOS.app"
+               BlueprintName = "per-app-vole_iOS"
+               ReferencedContainer = "container:per-app-vole.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "848706BC1C29F956A6DA1BA7"
-            BuildableName = "rust-tauri-nextjs-template_iOS.app"
-            BlueprintName = "rust-tauri-nextjs-template_iOS"
-            ReferencedContainer = "container:rust-tauri-nextjs-template.xcodeproj">
+            BuildableName = "per-app-vole_iOS.app"
+            BlueprintName = "per-app-vole_iOS"
+            ReferencedContainer = "container:per-app-vole.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "848706BC1C29F956A6DA1BA7"
-            BuildableName = "rust-tauri-nextjs-template_iOS.app"
-            BlueprintName = "rust-tauri-nextjs-template_iOS"
-            ReferencedContainer = "container:rust-tauri-nextjs-template.xcodeproj">
+            BuildableName = "per-app-vole_iOS.app"
+            BlueprintName = "per-app-vole_iOS"
+            ReferencedContainer = "container:per-app-vole.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -101,9 +101,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "848706BC1C29F956A6DA1BA7"
-            BuildableName = "rust-tauri-nextjs-template_iOS.app"
-            BlueprintName = "rust-tauri-nextjs-template_iOS"
-            ReferencedContainer = "container:rust-tauri-nextjs-template.xcodeproj">
+            BuildableName = "per-app-vole_iOS.app"
+            BlueprintName = "per-app-vole_iOS"
+            ReferencedContainer = "container:per-app-vole.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>

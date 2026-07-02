@@ -1,5 +1,5 @@
 {
-  "name": "rust-tauri-nextjs-template",
+  "name": "per-app-vole",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,16 +11,16 @@
     "NextJS",
     "Typescript"
   ],
-  "description": "Tauri with NextJS preset template",
+  "description": "Volume mixer for macOS. Adjust volume levels for individual apps independently",
   "author": "Clover You <hi@clovu.me>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clovu/rust-tauri-nextjs-template.git"
+    "url": "https://github.com/clovu/per-app-vole.git"
   },
-  "homepage": "https://github.com/clovu/rust-tauri-nextjs-template#readme",
+  "homepage": "https://github.com/clovu/per-app-vole#readme",
   "bugs": {
-    "url": "https://github.com/clovu/rust-tauri-nextjs-template/issues"
+    "url": "https://github.com/clovu/per-app-vole/issues"
   },
   "scripts": {
     "dev": "next dev --turbo",
@@ -41,9 +41,9 @@
     "@iconify-json/carbon": "^1.2.23",
     "@iconify-json/f7": "^1.2.2",
     "@radix-ui/react-icons": "^1.3.2",
-    "@radix-ui/react-popover": "^1.1.17",
-    "@radix-ui/react-scroll-area": "^1.2.12",
-    "@radix-ui/react-slot": "^1.2.5",
+    "@radix-ui/react-popover": "^1.1.18",
+    "@radix-ui/react-scroll-area": "^1.2.13",
+    "@radix-ui/react-slot": "^1.3.0",
     "@tauri-apps/api": "2",
     "@tauri-apps/plugin-shell": "2.3.5",
     "allotment": "^1.20.5",
@@ -51,12 +51,12 @@
     "clsx": "^2.1.1",
     "husky": "^9.1.7",
     "jotai": "^2.20.1",
-    "lucide-react": "^1.18.0",
-    "next": "16.2.9",
+    "lucide-react": "^1.23.0",
+    "next": "16.2.10",
     "next-themes": "^0.4.6",
     "react": "19.2.7",
     "react-dom": "19.2.7",
-    "react-resizable-panels": "4.11.2",
+    "react-resizable-panels": "4.12.0",
     "react-split-pane": "^3.2.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7"
@@ -66,14 +66,14 @@
     "@cspell/eslint-plugin": "^10.0.1",
     "@eslint/js": "^10.0.1",
     "@iconify/tailwind4": "^1.2.3",
-    "@tailwindcss/postcss": "^4.3.1",
-    "@tauri-apps/cli": "2.11.2",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@tauri-apps/cli": "2",
     "@types/node": "^26.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
     "cspell": "^10.0.1",
-    "eslint": "^10.5.0",
+    "eslint": "^10.6.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "globals": "^17.7.0",
@@ -81,9 +81,9 @@
     "postcss": "^8.5.16",
     "postcss-load-config": "^6.0.1",
     "react-compiler-healthcheck": "1.0.0",
-    "tailwindcss": "^4.3.1",
+    "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
+    "typescript-eslint": "^8.62.1",
     "vitest": "^4.1.9"
   }
 }

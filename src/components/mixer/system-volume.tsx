@@ -20,6 +20,7 @@ export function SystemVolume({ disabled, volume, onChange }: SystemVolumeProps) 
         <input
           aria-label="系统输出音量"
           type="range"
+          step="any"
           min="0"
           max="100"
           value={volume}

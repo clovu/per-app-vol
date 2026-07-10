@@ -15,7 +15,7 @@ use objc2_app_kit::{NSApplicationActivationPolicy, NSWorkspace};
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MixerState {
-    system_volume: u8,
+    system_volume: f32,
     system_muted: bool,
     apps: Vec<RunningApp>,
 }
@@ -31,12 +31,38 @@ pub struct RunningApp {
     controllable: bool,
 }
 
+fn get_default_output_device_volume() -> Result<f32, String> {
+    let device_id = get_default_output_device_id().unwrap();
+    let vol_address = default_output_volume_property_address();
+
+    let mut size = std::mem::size_of::<AudioObjectID>() as u32;
+    let mut vol: f32 = 0.0;
+
+    let status = unsafe {
+        AudioObjectGetPropertyData(
+            device_id,
+            NonNull::from(&vol_address),
+            0,
+            std::ptr::null(),
+            NonNull::from(&mut size),
+            NonNull::from(&mut vol).cast(),
+        )
+    };
+
+    if status != 0 {
+        return Err(format!("get default output device volume failed: {status}"));
+    };
+
+    Ok(vol)
+}
+
 #[tauri::command]
 pub fn get_mixer_state() -> Result<MixerState, String> {
     let output = run_osascript("get volume settings")?;
+    let sys_volume = get_default_output_device_volume()?;
 
     Ok(MixerState {
-        system_volume: parse_number_field(&output, "output volume")?,
+        system_volume: sys_volume * 100.0,
         system_muted: parse_bool_field(&output, "output muted")?,
         apps: running_apps()?,
     })
@@ -103,8 +129,8 @@ fn set_volume(vol: f32, device_id: AudioObjectID) -> Result<(), String> {
 }
 
 #[tauri::command]
-pub fn set_system_volume(volume: u8) -> Result<(), String> {
-    let volume = f32::from(volume.min(100)) / 100.0;
+pub fn set_system_volume(volume: f32) -> Result<(), String> {
+    let volume = volume.min(100.0) / 100.0;
     let device_id = get_default_output_device_id()?;
     set_volume(volume, device_id)
 }
@@ -159,7 +185,7 @@ fn running_apps() -> Result<Vec<RunningApp>, String> {
     Ok(Vec::new())
 }
 
-fn parse_number_field(settings: &str, name: &str) -> Result<u8, String> {
+fn _parse_number_field(settings: &str, name: &str) -> Result<u8, String> {
     field_value(settings, name)?
         .parse()
         .map_err(|error| format!("invalid {name}: {error}"))
@@ -182,13 +208,13 @@ fn field_value<'a>(settings: &'a str, name: &str) -> Result<&'a str, String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{parse_bool_field, parse_number_field};
+    use super::{_parse_number_field, parse_bool_field};
 
     const SETTINGS: &str = "output volume:42, input volume:66, alert volume:75, output muted:false";
 
     #[test]
     fn parses_volume_settings() {
-        assert_eq!(parse_number_field(SETTINGS, "output volume").unwrap(), 42);
+        assert_eq!(_parse_number_field(SETTINGS, "output volume").unwrap(), 42);
         assert!(!parse_bool_field(SETTINGS, "output muted").unwrap());
     }
 }

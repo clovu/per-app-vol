@@ -13,7 +13,6 @@ objc
 rlib
 serde
 skiped
-sqlx
 staticlib
 tauri
 tlsv

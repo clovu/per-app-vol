@@ -7,7 +7,7 @@ import 'allotment/dist/style.css'
 import { cn } from '@/lib/utils'
 import { activeAtom, useLangStore } from '@/store/language'
 
-import { WinDisplayController } from '@/components/win-display-controller'
+// import { WinDisplayController } from '@/components/win-display-controller'
 import { Header } from '@/components/header'
 import { Nav, NavLink } from '@/components/nav'
 import { useSetAtom } from 'jotai'
@@ -98,7 +98,7 @@ export default function Home() {
         </Allotment.Pane>
       </Allotment>
     </main >
-    <WinDisplayController />
+    {/* <WinDisplayController/> */}
   </>
 }
 

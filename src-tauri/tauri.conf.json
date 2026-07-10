@@ -9,6 +9,10 @@
     "frontendDist": "../out"
   },
   "app": {
+    "trayIcon": {
+      "id": "main",
+      "iconPath": "icons/32x32.png"
+    },
     "windows": [
       {
         "width": 600,

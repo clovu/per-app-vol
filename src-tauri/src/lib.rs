@@ -1,17 +1,13 @@
 #![allow(unexpected_cfgs)]
 
 use anyhow::{Context, Result};
-use manager::app_handle::AppHandleManager;
-use std::{error, fs, ops::Add, sync::Mutex};
+use std::{error, sync::Mutex};
 
 use serde::{Deserialize, Serialize};
 use sqlx::{Pool, Sqlite, migrate::MigrateDatabase};
-use tauri::Manager;
-#[cfg(target_os = "macos")]
-use utils::window::WebviewWindowExt;
+use tauri::ActivationPolicy;
 
 mod manager;
-mod utils;
 
 static DB_URL: Mutex<String> = Mutex::new(String::new());
 
@@ -159,32 +155,12 @@ async fn get_task_list() -> Result<Vec<Task>, Box<dyn error::Error>> {
 pub async fn run() {
     tauri::Builder::default()
         .setup(|app| {
-            let app_data_dir = app
-                .path()
-                .app_data_dir()
-                .context("failed to get app data dir")?;
-
-            let app_data_dir = app_data_dir
-                .to_str()
-                .context("failed to convert app data dir")?;
-
-            // create an app-data directory if not exists
-            fs::create_dir_all(app_data_dir)?;
-
-            let app_data_dir = String::from("sqlite:").add(app_data_dir).add("/cache.db");
-
-            *DB_URL.lock().expect("failed to lock db url mutex") = app_data_dir;
-
-            AppHandleManager::global().init(app.app_handle().clone());
-
-            #[cfg(target_os = "macos")]
-            if let Some(window) = app.get_webview_window("main") {
-                window.to_native_window();
-            }
-
+            app.set_activation_policy(ActivationPolicy::Accessory);
+            manager::popover::setup(app)?;
             Ok(())
         })
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_nspopover::init())
         .invoke_handler(tauri::generate_handler![
             get_tasks,
             add_task,

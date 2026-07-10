@@ -1,112 +1,139 @@
 'use client'
 
-import React, { createRef, useState } from 'react'
-import { Allotment, AllotmentHandle } from 'allotment'
-import 'allotment/dist/style.css'
+import { invoke } from '@tauri-apps/api/core'
+import { RefreshCw, Search, Volume2, VolumeX } from 'lucide-react'
+import { useEffect, useEffectEvent, useState } from 'react'
 
-import { cn } from '@/lib/utils'
-import { activeAtom, useLangStore } from '@/store/language'
-
-// import { WinDisplayController } from '@/components/win-display-controller'
-import { Header } from '@/components/header'
-import { Nav, NavLink } from '@/components/nav'
-import { useSetAtom } from 'jotai'
-
-let firstLoad = true
-
-export default function Home() {
-  const [isCollapsed, setCollapsed] = useState(false)
-  const paneRef = createRef<AllotmentHandle>()
-  const [items, setItems] = useState<NavLink[]>([
-    { id: 'java', title: 'Java' },
-    { id: 'rust', title: 'Rust' },
-    { id: 'ts', title: 'TypeScript' },
-    { id: 'go', title: 'Golang' },
-  ])
-  const setActive = useSetAtom(activeAtom)
-  const [trs, setTrs] = useState(false)
-  const [addInpVisible, setAddInpVisible] = useState(false)
-
-  function onNavClick(link: NavLink) {
-    setActive(link)
-  }
-
-  function onAddClick() {
-    setAddInpVisible(true)
-  }
-
-  return <>
-    <main className="flex h-screen">
-      <Allotment
-        snap
-        defaultSizes={[180]}
-        ref={paneRef}
-        onChange={([first]) => {
-          if (firstLoad) {
-            firstLoad = false
-            return
-          }
-
-          if (isCollapsed && first)
-            setCollapsed(false)
-          else if (!isCollapsed && !first)
-            setCollapsed(true)
-        }}
-        separator={false}
-        proportionalLayout
-      >
-        <Allotment.Pane
-          minSize={180}
-          preferredSize={180}
-          snap
-          visible={!isCollapsed}
-          className="flex flex-col"
-        >
-          <div className="h-head w-full shrink-0" data-tauri-drag-region></div>
-          <Nav
-            className="grow overflow-hidden"
-            links={items}
-            showInput={addInpVisible}
-            onClick={onNavClick}
-            hideInput={(e) => {
-              const value = e.target.value
-              setItems([{ id: value, title: value }, ...items])
-              setAddInpVisible(false)
-            }}
-          />
-        </Allotment.Pane>
-        <Allotment.Pane
-          minSize={300}
-          className={cn('grow flex flex-col border-l border-l-border', trs && 'duration-150')}
-        >
-          <Header
-            className="w-full shrink"
-            collapsed={isCollapsed}
-            onChangeSide={() => {
-              setCollapsed(!isCollapsed)
-              setTrs(true)
-            }}
-            onAdd={onAddClick}
-            transition={trs}
-            onTransitionEnd={() => {
-              setTrs(false)
-            }}
-          />
-          <div className="flex grow w-full justify-center items-center">
-            <Counter />
-          </div>
-        </Allotment.Pane>
-      </Allotment>
-    </main >
-    {/* <WinDisplayController/> */}
-  </>
+interface RunningApp {
+  id: string
+  name: string
+  pid: number
+  volume: number
+  muted: boolean
+  controllable: boolean
 }
 
-function Counter() {
-  const [language] = useLangStore()
+interface MixerState {
+  systemVolume: number
+  systemMuted: boolean
+  apps: RunningApp[]
+}
+
+export default function Home() {
+  const [mixer, setMixer] = useState<MixerState | null>(null)
+  const [query, setQuery] = useState('')
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  const refresh = useEffectEvent(async () => {
+    setLoading(true)
+    try {
+      setMixer(await invoke<MixerState>('get_mixer_state'))
+      setError(null)
+    }
+    catch (reason) {
+      setError(String(reason))
+    }
+    finally {
+      setLoading(false)
+    }
+  })
+
+  useEffect(() => {
+    void refresh()
+  }, [])
+
+  async function changeSystemVolume(volume: number) {
+    if (!mixer) return
+
+    setMixer({ ...mixer, systemVolume: volume })
+    try {
+      await invoke('set_system_volume', { volume })
+      setError(null)
+    }
+    catch (reason) {
+      setError(String(reason))
+      void refresh()
+    }
+  }
+
+  const apps = mixer?.apps.filter(app => app.name.toLowerCase().includes(query.toLowerCase())) ?? []
+
   return (
-    <p className="text-xs text-secondary-foreground whitespace-pre-wrap">
-      {language ?? 'Select an item'}
-    </p>
+    <main className="mixer-shell">
+      <header className="titlebar" data-tauri-drag-region>
+        <div>
+          <p className="eyebrow">PER-APP VOLUME</p>
+          <h1>声音混音器</h1>
+        </div>
+        <button className="icon-button" type="button" title="刷新已打开的应用" onClick={() => void refresh()} disabled={loading}>
+          <RefreshCw size={16} className={loading ? 'spin' : ''} />
+        </button>
+      </header>
+
+      <section className="master-strip" aria-label="系统音量">
+        <div className="app-icon master-icon"><Volume2 size={21} /></div>
+        <div className="strip-content">
+          <div className="strip-label">
+            <div><strong>系统输出</strong><span>默认输出设备</span></div>
+            <output>{mixer?.systemVolume ?? 0}%</output>
+          </div>
+          <input
+            aria-label="系统输出音量"
+            type="range"
+            min="0"
+            max="100"
+            value={mixer?.systemVolume ?? 0}
+            disabled={!mixer}
+            style={{ '--volume': `${mixer?.systemVolume ?? 0}%` } as React.CSSProperties}
+            onChange={event => void changeSystemVolume(Number(event.target.value))}
+          />
+        </div>
+      </section>
+
+      <div className="section-heading">
+        <div><h2>已打开的应用</h2><span>{apps.length} 个应用</span></div>
+        <label className="search-field">
+          <Search size={14} />
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="搜索" />
+        </label>
+      </div>
+
+      <section className="app-list" aria-label="应用音量">
+        {error && <p className="status error">{error}</p>}
+        {!error && loading && !mixer && <p className="status">正在读取音频状态...</p>}
+        {!loading && apps.length === 0 && <p className="status">没有找到已打开的用户应用</p>}
+        {apps.map(app => (
+          <article className="app-strip" key={app.id}>
+            <div className="app-icon">
+              {app.name.slice(0, 1).toUpperCase()}
+            </div>
+            <div className="strip-content">
+              <div className="strip-label">
+                <div><strong>{app.name}</strong><span>PID {app.pid}</span></div>
+                <output>{app.controllable ? `${app.volume}%` : '待接入'}</output>
+              </div>
+              <div className="app-control-row">
+                <button className="mute-button" type="button" title="应用静音" disabled={!app.controllable}>
+                  {app.muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                </button>
+                <input
+                  aria-label={`${app.name} 音量`}
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={app.volume}
+                  disabled={!app.controllable}
+                  style={{ '--volume': `${app.volume}%` } as React.CSSProperties}
+                  readOnly
+                />
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <footer>单应用音量需要 macOS 14.2+ 的 Core Audio Process Tap</footer>
+    </main>
   )
 }

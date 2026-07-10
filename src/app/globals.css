@@ -104,6 +104,246 @@
   }
 }
 
+@layer components {
+  .mixer-shell {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+    background: radial-gradient(circle at 85% 0%, rgb(57 117 102 / 10%), transparent 38%), #f4f5f2;
+    color: #202522;
+    font-family: Avenir Next, Avenir, Helvetica Neue, sans-serif;
+  }
+
+  .titlebar {
+    display: flex;
+    min-height: 78px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 24px 24px 14px;
+    border-bottom: 1px solid #d9ddd7;
+  }
+
+  .eyebrow {
+    color: #64716b;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .titlebar h1 {
+    font-size: 22px;
+    font-weight: 650;
+  }
+
+  .icon-button,
+  .mute-button {
+    display: grid;
+    place-items: center;
+    border: 1px solid #cfd5cf;
+    background: rgb(255 255 255 / 70%);
+    color: #34413b;
+  }
+
+  .icon-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+  }
+
+  .mute-button {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+  }
+
+  button:disabled {
+    opacity: .35;
+  }
+
+  .master-strip,
+  .app-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .master-strip {
+    padding: 18px 24px;
+    background: #e8ebe6;
+    border-bottom: 1px solid #d2d7d1;
+  }
+
+  .app-strip {
+    padding: 13px 24px;
+    border-bottom: 1px solid #e1e4df;
+  }
+
+  .app-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    place-items: center;
+    border: 1px solid #cbd2cb;
+    border-radius: 8px;
+    background: #fff;
+    color: #3e5f53;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+  }
+
+  .app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .master-icon {
+    background: #315e4e;
+    color: white;
+    border-color: #315e4e;
+  }
+
+  .strip-content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .strip-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 9px;
+  }
+
+  .strip-label div {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .strip-label strong {
+    overflow: hidden;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .strip-label span,
+  .section-heading span {
+    color: #79827d;
+    font-size: 10px;
+  }
+
+  .strip-label output {
+    color: #50615a;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  input[type='range'] {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    border-radius: 2px;
+    background: linear-gradient(to right, #3f7763 var(--volume), #cdd3ce var(--volume));
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+    appearance: none;
+    border: 2px solid #3f7763;
+    border-radius: 50%;
+    background: white;
+  }
+
+  input[type='range']:disabled {
+    filter: grayscale(1);
+    opacity: .42;
+  }
+
+  .app-control-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 24px 8px;
+  }
+
+  .section-heading>div {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .section-heading h2 {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .search-field {
+    display: flex;
+    width: 126px;
+    height: 28px;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    border: 1px solid #d1d6d1;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 65%);
+    color: #7d8782;
+  }
+
+  .search-field input {
+    width: 100%;
+    outline: none;
+    background: transparent;
+    font-size: 11px;
+  }
+
+  .app-list {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .status {
+    padding: 32px 24px;
+    text-align: center;
+    color: #758079;
+    font-size: 12px;
+  }
+
+  .error {
+    color: #a34242;
+  }
+
+  footer {
+    padding: 9px 24px;
+    border-top: 1px solid #d8dcd7;
+    color: #7d8580;
+    font-size: 9px;
+  }
+
+  .spin {
+    animation: spin .8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

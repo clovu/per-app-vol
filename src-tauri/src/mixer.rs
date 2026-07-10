@@ -1,5 +1,12 @@
-use std::process::Command;
+use std::{process::Command, ptr::NonNull};
 
+use objc2_audio_toolbox::kAudioHardwareServiceDeviceProperty_VirtualMainVolume;
+use objc2_core_audio::{
+    AudioObjectGetPropertyData, AudioObjectID, AudioObjectPropertyAddress,
+    AudioObjectSetPropertyData, kAudioDevicePropertyScopeOutput,
+    kAudioHardwarePropertyDefaultOutputDevice, kAudioObjectPropertyElementMain,
+    kAudioObjectPropertyScopeGlobal, kAudioObjectSystemObject,
+};
 use serde::Serialize;
 
 #[cfg(target_os = "macos")]
@@ -35,14 +42,71 @@ pub fn get_mixer_state() -> Result<MixerState, String> {
     })
 }
 
-#[tauri::command]
-pub fn set_system_volume(volume: u8) -> Result<(), String> {
-    if volume > 100 {
-        return Err("volume must be between 0 and 100".to_owned());
+fn default_output_device_property_address() -> AudioObjectPropertyAddress {
+    AudioObjectPropertyAddress {
+        mSelector: kAudioHardwarePropertyDefaultOutputDevice,
+        mScope: kAudioObjectPropertyScopeGlobal,
+        mElement: kAudioObjectPropertyElementMain,
+    }
+}
+
+fn default_output_volume_property_address() -> AudioObjectPropertyAddress {
+    AudioObjectPropertyAddress {
+        mSelector: kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
+        mScope: kAudioDevicePropertyScopeOutput,
+        mElement: kAudioObjectPropertyElementMain,
+    }
+}
+
+fn get_default_output_device_id() -> Result<AudioObjectID, String> {
+    let device_address = default_output_device_property_address();
+
+    let mut device_id: AudioObjectID = 0;
+    let mut size = std::mem::size_of::<AudioObjectID>() as u32;
+
+    let status = unsafe {
+        AudioObjectGetPropertyData(
+            kAudioObjectSystemObject.try_into().unwrap(),
+            NonNull::from(&device_address),
+            0,
+            std::ptr::null(),
+            NonNull::from(&mut size),
+            NonNull::from(&mut device_id).cast(),
+        )
+    };
+    if status != 0 {
+        return Err(format!("get output device failed: {status}"));
+    };
+
+    Ok(device_id)
+}
+
+fn set_volume(vol: f32, device_id: AudioObjectID) -> Result<(), String> {
+    let volume_address = default_output_volume_property_address();
+
+    let status = unsafe {
+        AudioObjectSetPropertyData(
+            device_id,
+            NonNull::from(&volume_address),
+            0,
+            std::ptr::null(),
+            std::mem::size_of::<f32>() as u32,
+            NonNull::from(&vol).cast(),
+        )
+    };
+
+    if status != 0 {
+        return Err(format!("get output device failed: {status}"));
     }
 
-    run_osascript(&format!("set volume output volume {volume}"))?;
     Ok(())
+}
+
+#[tauri::command]
+pub fn set_system_volume(volume: u8) -> Result<(), String> {
+    let volume = f32::from(volume.min(100)) / 100.0;
+    let device_id = get_default_output_device_id()?;
+    set_volume(volume, device_id)
 }
 
 fn run_osascript(script: &str) -> Result<String, String> {

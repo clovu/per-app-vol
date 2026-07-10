@@ -15,7 +15,7 @@ export function SystemVolume({ disabled, volume, onChange }: SystemVolumeProps) 
       <div className="strip-content">
         <div className="strip-label">
           <div><span>主音量</span><strong>Mac 扬声器</strong></div>
-          <output>{volume}%</output>
+          <output>{Math.trunc(volume)}%</output>
         </div>
         <input
           aria-label="系统输出音量"

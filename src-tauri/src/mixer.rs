@@ -1,4 +1,4 @@
-use std::{process::Command, ptr::NonNull};
+use std::{process::Command, ptr::NonNull, time::Instant};
 
 use objc2_audio_toolbox::kAudioHardwareServiceDeviceProperty_VirtualMainVolume;
 use objc2_core_audio::{
@@ -11,6 +11,9 @@ use serde::Serialize;
 
 #[cfg(target_os = "macos")]
 use objc2_app_kit::{NSApplicationActivationPolicy, NSWorkspace};
+use std::sync::Mutex;
+
+pub static IGNORE_NEXT_EVENT: Mutex<Option<Instant>> = Mutex::new(None);
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -57,6 +60,11 @@ fn get_default_output_device_volume() -> Result<f32, String> {
 }
 
 #[tauri::command]
+pub fn get_system_volume() -> Result<f32, String> {
+    get_default_output_device_volume()
+}
+
+#[tauri::command]
 pub fn get_mixer_state() -> Result<MixerState, String> {
     let output = run_osascript("get volume settings")?;
     let sys_volume = get_default_output_device_volume()?;
@@ -76,7 +84,7 @@ fn default_output_device_property_address() -> AudioObjectPropertyAddress {
     }
 }
 
-fn default_output_volume_property_address() -> AudioObjectPropertyAddress {
+pub fn default_output_volume_property_address() -> AudioObjectPropertyAddress {
     AudioObjectPropertyAddress {
         mSelector: kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
         mScope: kAudioDevicePropertyScopeOutput,
@@ -84,7 +92,7 @@ fn default_output_volume_property_address() -> AudioObjectPropertyAddress {
     }
 }
 
-fn get_default_output_device_id() -> Result<AudioObjectID, String> {
+pub fn get_default_output_device_id() -> Result<AudioObjectID, String> {
     let device_address = default_output_device_property_address();
 
     let mut device_id: AudioObjectID = 0;
@@ -109,6 +117,9 @@ fn get_default_output_device_id() -> Result<AudioObjectID, String> {
 
 fn set_volume(vol: f32, device_id: AudioObjectID) -> Result<(), String> {
     let volume_address = default_output_volume_property_address();
+
+    let mut state = IGNORE_NEXT_EVENT.lock().unwrap();
+    *state = Some(Instant::now());
 
     let status = unsafe {
         AudioObjectSetPropertyData(

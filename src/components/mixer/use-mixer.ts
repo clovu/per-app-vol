@@ -1,12 +1,21 @@
 'use client'
 
 import { invoke } from '@tauri-apps/api/core'
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { useEffect, useEffectEvent, useState } from 'react'
 
 import type { MixerState } from './types'
 
+function createMixerState(): MixerState {
+  return {
+    systemVolume: 0,
+    systemMuted: false,
+    apps: [],
+  }
+}
+
 export function useMixer() {
-  const [mixer, setMixer] = useState<MixerState | null>(null)
+  const [mixer, setMixer] = useState<MixerState>(createMixerState())
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -26,6 +35,12 @@ export function useMixer() {
 
   useEffect(() => {
     void refresh()
+
+    getCurrentWebviewWindow().listen('per-app-vol:show-popover', async () => {
+      const systemVolume = await invoke<number>('get_system_volume')
+      setMixer(mixer => ({ ...mixer, systemVolume: systemVolume * 100 }))
+    })
+
   }, [])
 
   async function setSystemVolume(volume: number) {

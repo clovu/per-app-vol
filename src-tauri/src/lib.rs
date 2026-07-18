@@ -1,6 +1,6 @@
 #![allow(unexpected_cfgs)]
 
-use tauri::{ActivationPolicy, Emitter};
+use tauri::{ActivationPolicy, Emitter, Manager};
 
 mod audio;
 mod manager;
@@ -22,12 +22,10 @@ pub async fn run() {
             app.set_activation_policy(ActivationPolicy::Accessory);
             manager::popover::setup(app)?;
             let app_handle = app.handle().clone();
-            audio::register_volume_change_listener(move || {
+            let guard = audio::listener::register_volume_change_listener(move || {
                 let _ = app_handle.emit("per-app-vol:show-popover", ());
             })?;
-            // Leak intentionally — the listener must survive for the app's
-            // entire lifetime.  CoreAudio holds a reference to the callback
-            // until process exit.
+            app.manage(guard);
             Ok(())
         })
         .run(tauri::generate_context!())

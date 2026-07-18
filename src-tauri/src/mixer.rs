@@ -1,19 +1,12 @@
-use std::{process::Command, ptr::NonNull, time::Instant};
+use std::{process::Command, sync::Arc};
 
-use objc2_audio_toolbox::kAudioHardwareServiceDeviceProperty_VirtualMainVolume;
-use objc2_core_audio::{
-    AudioObjectGetPropertyData, AudioObjectID, AudioObjectPropertyAddress,
-    AudioObjectSetPropertyData, kAudioDevicePropertyScopeOutput,
-    kAudioHardwarePropertyDefaultOutputDevice, kAudioObjectPropertyElementMain,
-    kAudioObjectPropertyScopeGlobal, kAudioObjectSystemObject,
-};
 use serde::Serialize;
 
 #[cfg(target_os = "macos")]
 use objc2_app_kit::{NSApplicationActivationPolicy, NSWorkspace};
-use std::sync::Mutex;
+use tauri::State;
 
-pub static IGNORE_NEXT_EVENT: Mutex<Option<Instant>> = Mutex::new(None);
+use crate::audio::{device, guard::VolumeChangeGuard};
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -34,40 +27,15 @@ pub struct RunningApp {
     controllable: bool,
 }
 
-fn get_default_output_device_volume() -> Result<f32, String> {
-    let device_id = get_default_output_device_id().unwrap();
-    let vol_address = default_output_volume_property_address();
-
-    let mut size = std::mem::size_of::<AudioObjectID>() as u32;
-    let mut vol: f32 = 0.0;
-
-    let status = unsafe {
-        AudioObjectGetPropertyData(
-            device_id,
-            NonNull::from(&vol_address),
-            0,
-            std::ptr::null(),
-            NonNull::from(&mut size),
-            NonNull::from(&mut vol).cast(),
-        )
-    };
-
-    if status != 0 {
-        return Err(format!("get default output device volume failed: {status}"));
-    };
-
-    Ok(vol)
-}
-
 #[tauri::command]
 pub fn get_system_volume() -> Result<f32, String> {
-    get_default_output_device_volume()
+    device::get_default_output_device_volume()
 }
 
 #[tauri::command]
 pub fn get_mixer_state() -> Result<MixerState, String> {
     let output = run_osascript("get volume settings")?;
-    let sys_volume = get_default_output_device_volume()?;
+    let sys_volume = device::get_default_output_device_volume()?;
 
     Ok(MixerState {
         system_volume: sys_volume * 100.0,
@@ -76,74 +44,15 @@ pub fn get_mixer_state() -> Result<MixerState, String> {
     })
 }
 
-fn default_output_device_property_address() -> AudioObjectPropertyAddress {
-    AudioObjectPropertyAddress {
-        mSelector: kAudioHardwarePropertyDefaultOutputDevice,
-        mScope: kAudioObjectPropertyScopeGlobal,
-        mElement: kAudioObjectPropertyElementMain,
-    }
-}
-
-pub fn default_output_volume_property_address() -> AudioObjectPropertyAddress {
-    AudioObjectPropertyAddress {
-        mSelector: kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
-        mScope: kAudioDevicePropertyScopeOutput,
-        mElement: kAudioObjectPropertyElementMain,
-    }
-}
-
-pub fn get_default_output_device_id() -> Result<AudioObjectID, String> {
-    let device_address = default_output_device_property_address();
-
-    let mut device_id: AudioObjectID = 0;
-    let mut size = std::mem::size_of::<AudioObjectID>() as u32;
-
-    let status = unsafe {
-        AudioObjectGetPropertyData(
-            kAudioObjectSystemObject.try_into().unwrap(),
-            NonNull::from(&device_address),
-            0,
-            std::ptr::null(),
-            NonNull::from(&mut size),
-            NonNull::from(&mut device_id).cast(),
-        )
-    };
-    if status != 0 {
-        return Err(format!("get output device failed: {status}"));
-    };
-
-    Ok(device_id)
-}
-
-fn set_volume(vol: f32, device_id: AudioObjectID) -> Result<(), String> {
-    let volume_address = default_output_volume_property_address();
-
-    let mut state = IGNORE_NEXT_EVENT.lock().unwrap();
-    *state = Some(Instant::now());
-
-    let status = unsafe {
-        AudioObjectSetPropertyData(
-            device_id,
-            NonNull::from(&volume_address),
-            0,
-            std::ptr::null(),
-            std::mem::size_of::<f32>() as u32,
-            NonNull::from(&vol).cast(),
-        )
-    };
-
-    if status != 0 {
-        return Err(format!("get output device failed: {status}"));
-    }
-
-    Ok(())
-}
-
 #[tauri::command]
-pub fn set_system_volume(volume: f32) -> Result<(), String> {
+pub fn set_system_volume(
+    volume: f32,
+    guard: State<'_, Arc<VolumeChangeGuard>>,
+) -> Result<(), String> {
     let volume = volume.min(100.0) / 100.0;
-    let device_id = get_default_output_device_id()?;
-    set_volume(volume, device_id)
+    let device_id = device::get_default_output_device_id()?;
+    guard.mark();
+    crate::audio::device::set_volume(volume, device_id)
 }
 
 fn run_osascript(script: &str) -> Result<String, String> {

@@ -1,6 +1,10 @@
 use std::{ffi::c_void, ptr::NonNull, sync::Arc};
 
 use objc2_core_audio::{AudioObjectID, AudioObjectPropertyAddress};
+use tauri::{
+    Emitter, Manager,
+    plugin::{Builder, TauriPlugin},
+};
 
 use crate::audio::{
     device::{default_output_volume_property_address, get_default_output_device_id},
@@ -109,4 +113,17 @@ unsafe extern "C-unwind" fn volume_change_callback(
 /// not been dropped.
 unsafe fn callback_from_client_data(client_data: *mut c_void) -> &'static ListenerContext {
     unsafe { &*(client_data as *const ListenerContext) }
+}
+
+pub fn init() -> TauriPlugin<tauri::Wry> {
+    Builder::new("macos-volume-change-listener")
+        .setup(|app, _| {
+            let app_handle = app.app_handle().clone();
+            let guard = register_volume_change_listener(move || {
+                let _ = app_handle.emit("per-app-vol:show-popover", ());
+            })?;
+            app.manage(guard);
+            Ok(())
+        })
+        .build()
 }

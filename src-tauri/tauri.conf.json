@@ -1,5 +1,5 @@
 {
-  "productName": "per-app-vole",
+  "productName": "Volune",
   "version": "0.0.0",
   "identifier": "io.github.clovu.per-app-vole",
   "build": {
@@ -15,10 +15,10 @@
     },
     "windows": [
       {
-        "width": 600,
+        "transparent": true,
+        "width": 340,
         "hiddenTitle": true,
-        "titleBarStyle": "Overlay",
-        "height": 400,
+        "height": 480,
         "visible": false
       }
     ],

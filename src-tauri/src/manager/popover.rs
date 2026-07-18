@@ -17,7 +17,7 @@ pub fn setup(app: &mut App) -> Result<()> {
         .context("main webview window is not configured")?;
 
     window.to_popover(ToPopoverOptions {
-        is_fullsize_content: true,
+        is_fullsize_content: false,
     });
 
     let app_handle = app.handle().clone();

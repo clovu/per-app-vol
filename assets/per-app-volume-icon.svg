@@ -1,0 +1,85 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="speaker-shape">
+      <path d="M92 205C90 188 101 178 116 177C134 176 153 179 175 178C202 151 236 118 274 82C289 69 308 79 312 97C315 151 312 212 313 272C314 323 316 372 312 414C308 432 291 444 276 436C247 410 211 375 176 340C154 340 132 342 112 338C96 335 88 322 91 304C91 270 88 234 92 205Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Speaker construction: every guide terminates on a point used by the final contour. -->
+  <g fill="none" stroke="#8B8177" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 178L175 178L276 76L318 96L318 416L276 438L176 340L70 340Z" stroke-width="2.4" stroke-opacity="0.34" />
+    <path d="M175 178L318 416M176 340L318 96" stroke-width="2.2" stroke-opacity="0.28" />
+    <path d="M55 178H199M54 340H200M175 149V369M318 62V450" stroke-width="2" stroke-opacity="0.26" />
+    <path d="M54 256H336" stroke-width="2.2" stroke-opacity="0.24" />
+    <circle cx="318" cy="256" r="160" stroke-width="2.2" stroke-opacity="0.20" />
+    <path d="M302 96H334M302 416H334M306 176H330M306 256H330M306 336H330" stroke-width="2" stroke-opacity="0.26" />
+
+    <circle cx="175" cy="178" r="6" stroke-width="2" stroke-opacity="0.34" />
+    <circle cx="176" cy="340" r="6" stroke-width="2" stroke-opacity="0.34" />
+    <circle cx="318" cy="96" r="6" stroke-width="2" stroke-opacity="0.34" />
+    <circle cx="318" cy="416" r="6" stroke-width="2" stroke-opacity="0.34" />
+    <circle cx="70" cy="178" r="5" stroke-width="2" stroke-opacity="0.30" />
+    <circle cx="70" cy="340" r="5" stroke-width="2" stroke-opacity="0.30" />
+
+    <!-- Abandoned cone candidates make the correction process visible. -->
+    <path d="M174 167L289 61M176 351L291 452" stroke-width="2.2" stroke-opacity="0.18" />
+    <path d="M180 184L302 88M179 333L302 425" stroke-width="1.8" stroke-opacity="0.17" />
+  </g>
+
+  <!-- Loose pencil hatching, clipped by the selected speaker silhouette. -->
+  <g clip-path="url(#speaker-shape)" fill="none" stroke="#605A55" stroke-linecap="round">
+    <path d="M61 330C113 291 166 238 229 181" stroke-width="3.4" stroke-opacity="0.30" />
+    <path d="M70 352C126 307 183 251 247 193" stroke-width="2.2" stroke-opacity="0.22" />
+    <path d="M84 369C137 329 201 265 266 205" stroke-width="3" stroke-opacity="0.27" />
+    <path d="M104 388C161 342 218 286 284 224" stroke-width="2.4" stroke-opacity="0.20" />
+    <path d="M127 406C182 363 241 304 300 250" stroke-width="3.1" stroke-opacity="0.25" />
+    <path d="M151 424C200 385 257 331 310 282" stroke-width="2.2" stroke-opacity="0.20" />
+    <path d="M75 276C124 236 168 195 214 153" stroke-width="2.1" stroke-opacity="0.18" />
+  </g>
+
+  <!-- Selected speaker contour: three imperfect passes, like a designer tracing over a construction. -->
+  <path d="M92 205C90 188 101 178 116 177C134 176 153 179 175 178C202 151 236 118 274 82C289 69 308 79 312 97C315 151 312 212 313 272C314 323 316 372 312 414C308 432 291 444 276 436C247 410 211 375 176 340C154 340 132 342 112 338C96 335 88 322 91 304C91 270 88 234 92 205Z" stroke="#383532" stroke-width="7.8" stroke-opacity="0.88" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M96 207C93 190 104 181 119 180C137 179 154 181 178 181C207 151 239 120 277 85C290 75 304 81 307 99C310 153 308 212 309 272C311 326 312 371 308 411C305 426 292 437 279 431C250 406 215 371 179 336C157 336 136 339 115 334C101 331 93 320 95 303C95 267 92 235 96 207Z" stroke="#5A5550" stroke-width="3.4" stroke-opacity="0.52" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M90 218C89 198 94 186 108 181M126 174C144 174 158 177 174 174M190 161C219 132 245 107 270 84M287 74C300 73 311 82 315 95M316 115C317 180 315 231 316 288M315 307C316 349 319 390 314 416M307 430C298 441 286 447 275 441M260 426C231 399 205 371 174 344M155 345C137 346 119 344 105 338M94 328C87 319 87 308 89 297" stroke="#282624" stroke-width="2.3" stroke-opacity="0.36" stroke-linecap="round" />
+
+  <!-- Fader construction: center lines, bounding boxes, crosses and rejected knob positions. -->
+  <g fill="none" stroke="#8B8177" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M352 126V388M409 100V414M466 137V377" stroke-width="2.2" stroke-opacity="0.32" />
+    <path d="M340 137H364M340 377H364M397 111H421M397 403H421M454 148H478M454 366H478" stroke-width="2" stroke-opacity="0.28" />
+
+    <rect x="324" y="174" width="56" height="48" rx="8" stroke-width="2.2" stroke-opacity="0.34" />
+    <path d="M324 174L380 222M380 174L324 222" stroke-width="1.8" stroke-opacity="0.25" />
+    <rect x="381" y="258" width="56" height="48" rx="8" stroke-width="2.2" stroke-opacity="0.34" />
+    <path d="M381 258L437 306M437 258L381 306" stroke-width="1.8" stroke-opacity="0.25" />
+    <rect x="438" y="214" width="56" height="48" rx="8" stroke-width="2.2" stroke-opacity="0.34" />
+    <path d="M438 214L494 262M494 214L438 262" stroke-width="1.8" stroke-opacity="0.25" />
+
+    <rect x="326" y="249" width="52" height="42" rx="7" stroke-width="1.8" stroke-dasharray="7 7" stroke-opacity="0.18" />
+    <rect x="383" y="169" width="52" height="42" rx="7" stroke-width="1.8" stroke-dasharray="7 7" stroke-opacity="0.18" />
+    <rect x="440" y="286" width="52" height="42" rx="7" stroke-width="1.8" stroke-dasharray="7 7" stroke-opacity="0.18" />
+  </g>
+
+  <!-- Selected fader tracks, redrawn in uneven pencil passes. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M352 139C349 196 354 306 352 376" stroke="#383532" stroke-width="7.2" stroke-opacity="0.86" />
+    <path d="M355 141C353 204 356 307 355 374" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.48" />
+    <path d="M409 113C406 187 412 331 409 402" stroke="#383532" stroke-width="7.2" stroke-opacity="0.86" />
+    <path d="M412 115C410 190 413 328 412 400" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.48" />
+    <path d="M466 150C463 203 469 314 466 364" stroke="#383532" stroke-width="7.2" stroke-opacity="0.86" />
+    <path d="M469 152C467 207 470 310 469 362" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.48" />
+
+    <path d="M326 193C327 180 339 174 353 175C369 175 379 184 378 199C379 212 368 220 352 220C337 221 325 211 326 193Z" stroke="#383532" stroke-width="7.2" stroke-opacity="0.88" />
+    <path d="M329 196C329 183 339 178 353 178C366 178 375 185 375 198C375 209 367 216 352 216C339 217 330 209 329 196Z" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.50" />
+    <path d="M383 278C384 265 396 259 410 260C426 260 436 269 435 284C436 297 425 305 409 305C394 306 382 296 383 278Z" stroke="#383532" stroke-width="7.2" stroke-opacity="0.88" />
+    <path d="M386 281C386 268 396 263 410 263C423 263 432 270 432 283C432 294 424 301 409 301C396 302 387 294 386 281Z" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.50" />
+    <path d="M440 234C441 221 453 215 467 216C483 216 493 225 492 240C493 253 482 261 466 261C451 262 439 252 440 234Z" stroke="#383532" stroke-width="7.2" stroke-opacity="0.88" />
+    <path d="M443 237C443 224 453 219 467 219C480 219 489 226 489 239C489 250 481 257 466 257C453 258 444 250 443 237Z" stroke="#5A5550" stroke-width="2.8" stroke-opacity="0.50" />
+  </g>
+
+  <!-- Small pressure tests and correction marks. -->
+  <g fill="none" stroke="#5F5954" stroke-linecap="round">
+    <path d="M109 192L124 185M102 207L118 200M103 321L121 331" stroke-width="3" stroke-opacity="0.35" />
+    <path d="M282 97L293 111M282 412L293 397" stroke-width="2.6" stroke-opacity="0.30" />
+    <path d="M337 182L346 176M394 268L403 261M451 224L460 217" stroke-width="2.8" stroke-opacity="0.34" />
+  </g>
+</svg>

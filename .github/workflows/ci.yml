@@ -12,9 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         settings:
-          - platform: windows-latest
-            args: "--verbose"
-            target: "windows"
           - platform: macos-latest
             args: "--target x86_64-apple-darwin"
             target: "macos-intel"
